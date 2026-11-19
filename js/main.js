@@ -328,8 +328,15 @@ function getRandomRecipe() {
 function displayValue(index) {
   var myRecipe = recipes[index];
 
-  function getImgSection() {
-    return `
+  document.getElementById("imgSection").innerHTML = getImgSection(myRecipe);
+  document.getElementById("infoSection").innerHTML = getInfoSection(myRecipe);
+  document.getElementById("ingredientsList").innerHTML = ingredientsSection(myRecipe);
+  document.getElementById("instructionsList").innerHTML = instructionsSection(myRecipe);
+  document.getElementById("nutritionGrid").innerHTML = nutritionRecipeSection(myRecipe);
+  document.getElementById("tipsList").innerHTML = chiefTipsSection(myRecipe);
+}
+function getImgSection(myRecipe) {
+  return `
           <img src="${myRecipe.imgUrl}" alt="${myRecipe.title}" class="recipe-image" />
             <div class="recipe-rating">
               <i class="fa-solid fa-star text-warning"></i>
@@ -353,10 +360,10 @@ function displayValue(index) {
               </div>
             </div>
   `;
-  }
+}
 
-  function getInfoSection() {
-    return `
+function getInfoSection(myRecipe) {
+  return `
               <div class="d-flex justify-content-between align-items-start mb-3">
                 <div class="recipe-badges d-flex gap-2">
                   <span class="badge-custom badge-difficulty"> ${myRecipe.difficulty}</span>
@@ -383,36 +390,36 @@ function displayValue(index) {
                 </div>
               </div>
   `;
-  }
+}
 
-  function ingredientsSection() {
-    var ingredientsSection = "";
-    for (let i = 0; i < myRecipe.ingredients.length; i++) {
-      ingredientsSection += `
+function ingredientsSection(myRecipe) {
+  var ingredientsSection = "";
+  for (let i = 0; i < myRecipe.ingredients.length; i++) {
+    ingredientsSection += `
     <li class="ingredient-item">
-                    <div class="number-circle">${i}</div>
+                    <div class="number-circle">${i + 1}</div>
                     ${myRecipe.ingredients[i]}
                   </li>
     `;
-    }
-    return ingredientsSection;
   }
+  return ingredientsSection;
+}
 
-  function instructionsSection() {
-    var instructionsSection = "";
-    for (let i = 0; i < myRecipe.instructions.length; i++) {
-      instructionsSection += `
+function instructionsSection(myRecipe) {
+  var instructionsSection = "";
+  for (let i = 0; i < myRecipe.instructions.length; i++) {
+    instructionsSection += `
                     <li class="instruction-item">
-                    <div class="number-circle">${i}</div>
+                    <div class="number-circle">${i + 1}</div>
                     ${myRecipe.instructions[i]}
                   </li>
     `;
-    }
-    return instructionsSection;
   }
+  return instructionsSection;
+}
 
-  function nutritionRecipeSection() {
-    return `
+function nutritionRecipeSection(myRecipe) {
+  return `
     <div class="nutrition-card">
                     <div class="nutrition-info">
                       <div class="nutrition-icon bg-warning">
@@ -469,27 +476,19 @@ function displayValue(index) {
                   </div>
 
   `;
-  }
+}
 
-  function chiefTipsSection() {
-    var chiefTipsSection = "";
-    for (let i = 0; i < myRecipe.chiefTips.length; i++) {
-      chiefTipsSection += `
+function chiefTipsSection(myRecipe) {
+  var chiefTipsSection = "";
+  for (let i = 0; i < myRecipe.chiefTips.length; i++) {
+    chiefTipsSection += `
                   <div class="tip-item">
                     <i class="fa-solid fa-circle-check tip-icon"></i
                     ><span>${myRecipe.chiefTips[i]}</span>
                   </div>
     `;
-    }
-    return chiefTipsSection;
   }
-
-  document.getElementById("imgSection").innerHTML = getImgSection();
-  document.getElementById("infoSection").innerHTML = getInfoSection();
-  document.getElementById("ingredientsList").innerHTML = ingredientsSection();
-  document.getElementById("instructionsList").innerHTML = instructionsSection();
-  document.getElementById("nutritionGrid").innerHTML = nutritionRecipeSection();
-  document.getElementById("tipsList").innerHTML = chiefTipsSection();
+  return chiefTipsSection;
 }
 
 getRandomRecipe();
